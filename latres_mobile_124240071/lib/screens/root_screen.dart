@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'home_screen.dart';
 import 'login_screen.dart';
 
 /// Halaman Root dengan BottomNavigationBar
-/// Sesuai materi Modul IV (Navigation - BottomNavigationBar)
 /// Berisi 3 Menu: Home (Beranda), Favorit, Profil
 class RootScreen extends StatefulWidget {
   final String username;
@@ -17,7 +18,7 @@ class _RootScreenState extends State<RootScreen> {
   int _selectedIndex = 0;
 
   /// Fungsi Logout: Menghapus session SharedPreferences dan kembali ke LoginScreen
-  /// Menggunakan Navigator.pushAndRemoveUntil sesuai Modul IV & Modul VI
+  /// Menggunakan Navigator.pushAndRemoveUntil
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('isLogin');
@@ -43,8 +44,8 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     // List halaman yang akan ditampilkan sesuai tab aktif
     final List<Widget> pages = [
-      // 1. Tab Home (sementara placeholder, kita bangun di step selanjutnya)
-      _buildHomePlaceholder(),
+      // 1. Tab Home (Daftar Acara TV dari API TVMaze)
+      const HomeScreen(),
       // 2. Tab Favorit (sementara placeholder, kita hubungkan ke Hive di step 4)
       _buildFavoritePlaceholder(),
       // 3. Tab Profil (menampilkan data user & logout)
@@ -60,8 +61,8 @@ class _RootScreenState extends State<RootScreen> {
           _selectedIndex == 0
               ? 'Skuy Nonton!'
               : _selectedIndex == 1
-                  ? 'Daftar Favorit'
-                  : 'Profil Pengguna',
+              ? 'Daftar Favorit'
+              : 'Profil Pengguna',
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -87,48 +88,10 @@ class _RootScreenState extends State<RootScreen> {
           });
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorit',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorit'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
-      ),
-    );
-  }
-
-  Widget _buildHomePlaceholder() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.tv, size: 80, color: Colors.redAccent),
-            const SizedBox(height: 16),
-            Text(
-              'Halo, ${widget.username}!',
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Tahap 1 (Login & Session) Berhasil! 🎉\nTekan tombol di bawah untuk melanjutkan ke pembuatan API TVMaze & Hive.',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-            ),
-          ],
-        ),
       ),
     );
   }

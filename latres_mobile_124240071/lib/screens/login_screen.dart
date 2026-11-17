@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'root_screen.dart';
 
 /// Halaman Login (LoginScreen)
-/// Mengikuti materi Modul III (State & Data) dan Modul VI (Local Storage - SharedPreferences).
-///
 /// Fitur:
 /// 1. Form input Username & Password dengan TextEditingController.
 /// 2. Validasi kredensial: Username = NIM (124240071) & Password = 123.
@@ -26,7 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // 2. Variabel State
   bool _isLoginFailed = false; // Menandakan apakah login terakhir kali gagal
   bool _obscurePassword = true; // Untuk toggle visibility password (show/hide)
-  bool _isCheckingSession = true; // Untuk menampilkan loading saat mengecek auto-login
+  bool _isCheckingSession =
+      true; // Untuk menampilkan loading saat mengecek auto-login
 
   @override
   void initState() {
@@ -142,18 +142,21 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_isCheckingSession) {
       return const Scaffold(
         backgroundColor: Color(0xFF141414),
-        body: Center(
-          child: CircularProgressIndicator(color: Colors.redAccent),
-        ),
+        body: Center(child: CircularProgressIndicator(color: Colors.redAccent)),
       );
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // Tema Dark mirip Netflix/NontonSkuy
+      backgroundColor: const Color(
+        0xFF121212,
+      ), // Tema Dark mirip Netflix/NontonSkuy
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 28.0,
+              vertical: 24.0,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -185,10 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 8),
                 Text(
                   'Streaming serial & TV show favoritmu',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[400],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[400]),
                 ),
                 const SizedBox(height: 36),
 
@@ -220,10 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 4),
                       Text(
                         'Gunakan NIM kamu dan password: 123',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[400],
-                        ),
+                        style: TextStyle(fontSize: 12, color: Colors.grey[400]),
                       ),
                       const SizedBox(height: 20),
 
@@ -270,27 +267,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 24),
-                // Hint info untuk memudahkan penguji / asdos
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.05),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.info_outline, size: 16, color: Colors.grey),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Demo NIM: 124240071 | Pass: 123',
-                        style: TextStyle(color: Colors.grey[400], fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -300,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   /// Helper Widget untuk membuat TextField yang rapi
-  /// Sesuai materi Modul 3: border dinamis berubah menjadi merah saat error (_isLoginFailed)
+  /// Border dinamis berubah menjadi merah saat error (_isLoginFailed)
   Widget _buildTextField({
     required TextEditingController controller,
     required String hintText,
@@ -309,8 +285,12 @@ class _LoginScreenState extends State<LoginScreen> {
     bool isPassword = false,
     TextInputType keyboardType = TextInputType.text,
   }) {
-    final Color borderColor = _isLoginFailed ? Colors.redAccent : Colors.grey.shade700;
-    final Color focusColor = _isLoginFailed ? Colors.redAccent : Colors.redAccent;
+    final Color borderColor = _isLoginFailed
+        ? Colors.redAccent
+        : Colors.grey.shade700;
+    final Color focusColor = _isLoginFailed
+        ? Colors.redAccent
+        : Colors.redAccent;
 
     return TextField(
       controller: controller,

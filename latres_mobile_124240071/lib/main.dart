@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'screens/login_screen.dart';
 
 void main() async {
   // Memastikan binding Flutter sudah terinisialisasi sebelum menjalankan operasi async
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inisialisasi Hive untuk penyimpanan lokal (Modul VI)
+  // Inisialisasi Hive untuk penyimpanan lokal
   await Hive.initFlutter();
 
   runApp(const MainApp());
