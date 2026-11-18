@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
 import '../models/favorite_show.dart';
 import '../services/api_service.dart';
 
@@ -78,7 +79,7 @@ class _DetailScreenState extends State<DetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Dihapus dari daftar favorit.'),
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.red, // SnackBar merah saat dihapus
             duration: Duration(seconds: 1),
           ),
         );
@@ -88,7 +89,8 @@ class _DetailScreenState extends State<DetailScreen> {
       final newFavorite = FavoriteShow(
         id: widget.showId,
         name: _showDetail!['name'] ?? 'Tanpa Judul',
-        imageUrl: _showDetail!['image']?['original'] ??
+        imageUrl:
+            _showDetail!['image']?['original'] ??
             _showDetail!['image']?['medium'],
         rating: '${_showDetail!['rating']?['average'] ?? 'N/A'}',
         genres: (_showDetail!['genres'] as List<dynamic>?)?.join(', ') ?? '-',
@@ -97,8 +99,8 @@ class _DetailScreenState extends State<DetailScreen> {
       box.add(newFavorite);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Ditambahkan ke daftar favorit! ❤️'),
-          backgroundColor: Colors.redAccent,
+          content: Text('Ditambahkan ke daftar favorit!'),
+          backgroundColor: Colors.green, // SnackBar hijau saat ditambah
           duration: Duration(seconds: 1),
         ),
       );
@@ -153,8 +155,10 @@ class _DetailScreenState extends State<DetailScreen> {
           children: [
             CircularProgressIndicator(color: Colors.redAccent),
             SizedBox(height: 16),
-            Text('Memuat informasi serial...',
-                style: TextStyle(color: Colors.grey)),
+            Text(
+              'Memuat informasi serial...',
+              style: TextStyle(color: Colors.grey),
+            ),
           ],
         ),
       );
@@ -168,14 +172,19 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.redAccent),
+              const Icon(
+                Icons.error_outline,
+                size: 64,
+                color: Colors.redAccent,
+              ),
               const SizedBox(height: 16),
               const Text(
                 'Gagal Mengambil Detail',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
@@ -187,8 +196,9 @@ class _DetailScreenState extends State<DetailScreen> {
               ElevatedButton(
                 onPressed: _fetchDetail,
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                    foregroundColor: Colors.white),
+                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text('Coba Lagi'),
               ),
             ],
@@ -205,10 +215,9 @@ class _DetailScreenState extends State<DetailScreen> {
     final dynamic rating = show['rating']?['average'];
     final String ratingText = rating != null ? '$rating' : 'N/A';
     final List<dynamic>? genresList = show['genres'];
-    final String genresText =
-        (genresList != null && genresList.isNotEmpty)
-            ? genresList.join(', ')
-            : 'General';
+    final String genresText = (genresList != null && genresList.isNotEmpty)
+        ? genresList.join(', ')
+        : 'General';
     final String summaryClean = _cleanHtml(show['summary']);
     final bool favorited = _isFavorite();
 
@@ -251,7 +260,10 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 8.0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -283,7 +295,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     if (show['status'] != null)
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(4),
@@ -291,7 +305,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         child: Text(
                           '${show['status']}',
                           style: TextStyle(
-                              color: Colors.grey[300], fontSize: 12),
+                            color: Colors.grey[300],
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                   ],
@@ -327,7 +343,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         label: const Text(
                           'Nonton',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.redAccent,

@@ -146,7 +146,7 @@ class FavoriteScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('${favorite.name} dihapus dari favorit.'),
-                        backgroundColor: Colors.grey[800],
+                        backgroundColor: Colors.red,
                         duration: const Duration(seconds: 1),
                       ),
                     );
