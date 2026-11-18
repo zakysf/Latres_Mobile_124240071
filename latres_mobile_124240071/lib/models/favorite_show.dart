@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'favorite_show.g.dart';
 
-/// Model untuk menyimpan Show TV ke Hive Local Database (Modul VI)
+/// Model untuk menyimpan Show TV ke Hive Local Database
 /// typeId: 0 adalah identifier unik untuk model ini di Hive
 @HiveType(typeId: 0)
 class FavoriteShow extends HiveObject {

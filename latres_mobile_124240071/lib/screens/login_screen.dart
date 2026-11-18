@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
-                    Icons.movie_filter_rounded,
+                    Icons.local_movies,
                     size: 72,
                     color: Colors.redAccent,
                   ),
@@ -217,18 +217,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Gunakan NIM kamu dan password: 123',
-                        style: TextStyle(fontSize: 12, color: Colors.grey[400]),
-                      ),
                       const SizedBox(height: 20),
 
                       // Username Field (Input NIM)
                       _buildTextField(
                         controller: _usernameController,
-                        hintText: 'Masukkan NIM (124240071)',
-                        labelText: 'Username (NIM)',
+                        hintText: '124240071',
+                        labelText: 'Username',
                         icon: Icons.person_outline,
                         keyboardType: TextInputType.number,
                       ),
@@ -237,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Password Field (Input 123)
                       _buildTextField(
                         controller: _passwordController,
-                        hintText: 'Masukkan Password (123)',
+                        hintText: '123',
                         labelText: 'Password',
                         icon: Icons.lock_outline,
                         isPassword: true,

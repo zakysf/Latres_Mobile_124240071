@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'login_screen.dart';
 
 /// Halaman Profil Pengguna (ProfileScreen)
@@ -82,11 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: const Color(0xFF2A2A2A),
-                child: const Icon(
-                  Icons.person,
-                  size: 60,
-                  color: Colors.white,
-                ),
+                child: const Icon(Icons.person, size: 60, color: Colors.white),
               ),
             ),
             const SizedBox(height: 16),
@@ -102,85 +99,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 4),
             Text(
-              'Mahasiswa Informatika / Praktikan Mobile',
+              'Jekk',
               style: TextStyle(fontSize: 13, color: Colors.grey[400]),
             ),
             const SizedBox(height: 28),
 
-            // 3. Card Kesan & Pesan Praktikum (Kriteria e.ii)
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E1E1E),
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.4),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Kesan
-                  Row(
-                    children: [
-                      const Icon(Icons.sentiment_satisfied_alt,
-                          color: Colors.amber, size: 20),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Kesan Selama Praktikum:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Praktikum Pemrograman Mobile sangat seru dan membuka wawasan baru tentang pengembangan aplikasi cross-platform. Penjelasan materi dari modul praktikum sangat terstruktur, mulai dari UI dasar, State Management, HTTP Request API, hingga Local Storage Hive dan SharedPreferences!',
-                    style: TextStyle(
-                      color: Colors.grey[300],
-                      fontSize: 13,
-                      height: 1.4,
-                    ),
-                  ),
-                  const Divider(color: Colors.grey, height: 28),
-
-                  // Pesan
-                  Row(
-                    children: [
-                      const Icon(Icons.favorite,
-                          color: Colors.redAccent, size: 20),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Pesan untuk Asisten Praktikum:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Terima kasih banyak kepada seluruh Mas & Mbak Asisten Praktikum yang selalu sabar, ramah, dan solutif dalam membimbing serta menjawab berbagai kendala kami selama sesi lab. Sukses selalu untuk tim asisten! 🚀',
-                    style: TextStyle(
-                      color: Colors.grey[300],
-                      fontSize: 13,
-                      height: 1.4,
-                    ),
-                  ),
-                ],
-              ),
+            // kesan dan pesan
+            Text(
+              "Kesan: Mantap aja sih sejauh ini. Aslabnya mantap, ganteng, mengayomi, memaklumi praktikan yang mungkin agak lemot, dsb. Jujur materinya banyak dan ngebut bgt kalo lagi kelas tuh, jadinya agak challenging juga buat belajar mobil ni.",
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 28),
+            Text(
+              "Pesan: Terus improve buat materi prak mobile ini biar gimana caranya praktikan bisa paham konsep dari setiap modulnya (secara konsep umum dan di kode nya gimana), karena kalo sampe praktek dan jelasin detail bakal lama bgt dan kayaknya ga cukup cuma 2 jam.",
+            ),
+            const SizedBox(height: 28),
 
             // 4. Tombol Logout (Kriteria e.iii)
             SizedBox(

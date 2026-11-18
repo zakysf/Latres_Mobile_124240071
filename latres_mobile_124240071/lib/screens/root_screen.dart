@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'favorite_screen.dart';
 import 'home_screen.dart';
-import 'login_screen.dart';
 import 'profile_screen.dart';
 
 /// Halaman Root dengan BottomNavigationBar
@@ -20,29 +18,6 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   int _selectedIndex = 0;
 
-  /// Fungsi Logout: Menghapus session SharedPreferences dan kembali ke LoginScreen
-  /// Menggunakan Navigator.pushAndRemoveUntil (Modul IV & Modul VI)
-  Future<void> _logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('isLogin');
-    await prefs.remove('username');
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Berhasil logout.'),
-          backgroundColor: Colors.grey,
-        ),
-      );
-
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-        (route) => false, // Hapus semua riwayat stack navigasi
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     // List halaman yang ditampilkan sesuai tab aktif (Modul IV)
@@ -51,7 +26,7 @@ class _RootScreenState extends State<RootScreen> {
       const HomeScreen(),
       // 2. Tab Favorit: Daftar Acara TV yang disimpan di Hive
       const FavoriteScreen(),
-      // 3. Tab Profil: Info User, Kesan Pesan & Logout
+      // 3. Tab Profil: Info User, Kesan Pesan & Tombol Logout
       ProfileScreen(fallbackUsername: widget.username),
     ];
 
@@ -71,13 +46,6 @@ class _RootScreenState extends State<RootScreen> {
             color: Colors.white,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: Colors.redAccent),
-            tooltip: 'Logout',
-            onPressed: _logout,
-          ),
-        ],
       ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
