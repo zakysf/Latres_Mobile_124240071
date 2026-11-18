@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
+import 'models/favorite_show.dart';
 import 'screens/login_screen.dart';
 
 void main() async {
   // Memastikan binding Flutter sudah terinisialisasi sebelum menjalankan operasi async
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inisialisasi Hive untuk penyimpanan lokal
+  // Inisialisasi Hive untuk penyimpanan lokal (Modul VI)
   await Hive.initFlutter();
+
+  // Daftarkan Adapter untuk model FavoriteShow dan buka Box 'favorites'
+  Hive.registerAdapter(FavoriteShowAdapter());
+  await Hive.openBox<FavoriteShow>('favorites');
 
   runApp(const MainApp());
 }

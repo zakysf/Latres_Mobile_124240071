@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'favorite_screen.dart';
 import 'home_screen.dart';
 import 'login_screen.dart';
+import 'profile_screen.dart';
 
 /// Halaman Root dengan BottomNavigationBar
+/// Sesuai materi Modul IV (Navigation - BottomNavigationBar)
 /// Berisi 3 Menu: Home (Beranda), Favorit, Profil
 class RootScreen extends StatefulWidget {
   final String username;
@@ -18,7 +21,7 @@ class _RootScreenState extends State<RootScreen> {
   int _selectedIndex = 0;
 
   /// Fungsi Logout: Menghapus session SharedPreferences dan kembali ke LoginScreen
-  /// Menggunakan Navigator.pushAndRemoveUntil
+  /// Menggunakan Navigator.pushAndRemoveUntil (Modul IV & Modul VI)
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('isLogin');
@@ -42,14 +45,14 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // List halaman yang akan ditampilkan sesuai tab aktif
+    // List halaman yang ditampilkan sesuai tab aktif (Modul IV)
     final List<Widget> pages = [
-      // 1. Tab Home (Daftar Acara TV dari API TVMaze)
+      // 1. Tab Home: Daftar Acara TV dari API TVMaze
       const HomeScreen(),
-      // 2. Tab Favorit (sementara placeholder, kita hubungkan ke Hive di step 4)
-      _buildFavoritePlaceholder(),
-      // 3. Tab Profil (menampilkan data user & logout)
-      _buildProfilePlaceholder(),
+      // 2. Tab Favorit: Daftar Acara TV yang disimpan di Hive
+      const FavoriteScreen(),
+      // 3. Tab Profil: Info User, Kesan Pesan & Logout
+      ProfileScreen(fallbackUsername: widget.username),
     ];
 
     return Scaffold(
@@ -61,8 +64,8 @@ class _RootScreenState extends State<RootScreen> {
           _selectedIndex == 0
               ? 'Skuy Nonton!'
               : _selectedIndex == 1
-              ? 'Daftar Favorit'
-              : 'Profil Pengguna',
+                  ? 'Daftar Favorit'
+                  : 'Profil',
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -88,49 +91,17 @@ class _RootScreenState extends State<RootScreen> {
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorit'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFavoritePlaceholder() {
-    return const Center(
-      child: Text(
-        'Halaman Favorit (Hive Local Database)\nAkan dibuat di tahap 4',
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.grey, fontSize: 16),
-      ),
-    );
-  }
-
-  Widget _buildProfilePlaceholder() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.account_circle, size: 90, color: Colors.redAccent),
-          const SizedBox(height: 12),
-          Text(
-            widget.username,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Beranda',
           ),
-          const SizedBox(height: 24),
-          ElevatedButton.icon(
-            onPressed: _logout,
-            icon: const Icon(Icons.logout),
-            label: const Text('Logout'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.redAccent,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorit',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
           ),
         ],
       ),
